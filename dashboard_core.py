@@ -33,15 +33,15 @@ def run_dashboard(condition: str):
 
     # ── Load Model & Data ─────────────────────────────────────────
     @st.cache_resource
+    @st.cache_resource
     def load_model():
         with open("model/rf_model.pkl", "rb") as f:
             rf = pickle.load(f)
-        with open("model/shap_explainer.pkl", "rb") as f:
-            explainer = pickle.load(f)
         with open("model/X_test.pkl", "rb") as f:
             X_test = pickle.load(f)
         with open("model/y_test.pkl", "rb") as f:
             y_test = pickle.load(f)
+        explainer = shap.TreeExplainer(rf)
         return rf, explainer, X_test, y_test
 
     rf, explainer, X_test, y_test = load_model()
