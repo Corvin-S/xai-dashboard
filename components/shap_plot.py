@@ -1,5 +1,5 @@
 """
-shap_plot.py — Custom SHAP visualization for lay users.
+shap_plot.py — Custom SHAP visualization
 
 Converts raw SHAP values into percentage-based feature contributions
 and renders them as a horizontal Plotly bar chart. This representation
