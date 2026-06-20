@@ -1,7 +1,5 @@
-cat > requirements.txt << 'EOF'
 streamlit
 scikit-learn
 pandas
-numpy<2
+numpy==1.26.4
 plotly
-EOF
