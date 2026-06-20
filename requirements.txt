@@ -1,7 +1,7 @@
+cat > requirements.txt << 'EOF'
 streamlit
 scikit-learn
-shap
 pandas
 numpy<2
 plotly
-matplotlib
+EOF
