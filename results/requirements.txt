@@ -1,5 +1,0 @@
-streamlit
-scikit-learn
-pandas
-numpy==1.26.4
-plotly

@@ -1,3 +1,20 @@
+"""
+feature_mapping.py — Human-readable labels for the German Credit Dataset.
+
+This module provides mappings from the integer-encoded feature values
+used by the Random Forest classifier back to their original descriptive
+labels as defined in the UCI dataset documentation (Hofmann, 1994).
+
+It serves two purposes in the dashboard:
+    1. Display applicant attributes in a form accessible to non-expert
+       users (e.g., "500 - 1000 DM" instead of the integer code 3)
+    2. Replace technical column names with readable labels
+       (e.g., "checking_account" becomes "Checking Account")
+
+The module distinguishes between:
+    - 13 categorical features (mapped via FEATURE_MAPPINGS)
+    - 7 numeric features (displayed as-is with units via FEATURE_LABELS)
+"""
 # Feature value mappings for the German Credit Dataset (Hofmann, 1994)
 # Based on the original UCI dataset documentation (german.doc)
 
