@@ -5,6 +5,9 @@ Converts raw SHAP values into percentage-based feature contributions
 and renders them as a horizontal Plotly bar chart. This representation
 is more accessible to non-expert users than the default SHAP bar plot,
 which displays abstract decimal values on the x-axis.
+
+The raw SHAP values remain accessible via hover tooltip to preserve
+technical transparency alongside the simplified percentage view.
 """
 
 import plotly.graph_objects as go
@@ -17,7 +20,8 @@ def show_shap_chart(shap_values, feature_names, pred_label, max_display=10):
     Each feature's contribution is expressed as a percentage of the
     total absolute SHAP impact, making it intuitively interpretable
     for lay users (e.g., "Checking Account contributes 35% to this
-    prediction").
+    prediction"). The raw SHAP value is shown on hover for technical
+    transparency.
 
     Args:
         shap_values: 1D array of SHAP values for the predicted class.
@@ -45,6 +49,12 @@ def show_shap_chart(shap_values, feature_names, pred_label, max_display=10):
         for v in top_shap
     ]
 
+    # Hover labels: direction relative to predicted class
+    hover_directions = [
+        f"Supports {pred_label}" if v >= 0 else f"Opposes {pred_label}"
+        for v in top_shap
+    ]
+
     fig = go.Figure(go.Bar(
         x=top_percentages,
         y=top_names,
@@ -53,6 +63,14 @@ def show_shap_chart(shap_values, feature_names, pred_label, max_display=10):
         text=[f"{p:.0f}%" for p in top_percentages],
         textposition="outside",
         textfont=dict(size=12),
+        customdata=list(zip(top_shap, hover_directions)),
+        hovertemplate=(
+            "<b>%{y}</b><br>"
+            "Contribution: %{x:.1f}%<br>"
+            "SHAP Value: %{customdata[0]:.4f}<br>"
+            "%{customdata[1]}"
+            "<extra></extra>"
+        ),
     ))
 
     fig.update_layout(
