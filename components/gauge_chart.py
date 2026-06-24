@@ -1,15 +1,17 @@
 """
-app_gauge.py — Entry point for the gauge chart condition.
+gauge_chart.py — Gauge chart visualization for model confidence.
 
-Launches the Credit Risk Dashboard with the gauge chart as the
-fixed uncertainty visualization. Participants using this version
-see only the gauge and cannot switch to the text condition.
+Displays the model's predictive confidence as a semicircular gauge.
+The scale starts at 50% because a binary Random Forest classifier
+always assigns the predicted class a probability of at least 50%.
+The 50-100% range is divided into three equal thirds:
+    Low:    50-67%
+    Medium: 67-83%
+    High:   83-100%
 """
 
-from results.dashboard_core import run_dashboard
-
-run_dashboard(condition="gauge")
 import plotly.graph_objects as go
+
 
 def show_gauge(confidence: float):
     fig = go.Figure(go.Indicator(
@@ -21,9 +23,9 @@ def show_gauge(confidence: float):
             "axis": {"range": [50, 100], "tickwidth": 1},
             "bar": {"color": "#1f77b4"},
             "steps": [
-                {"range": [50, 66.7], "color": "#ff4444"},
-                {"range": [66.7, 83.3], "color": "#ffaa00"},
-                {"range": [83.3, 100], "color": "#44bb44"},
+                {"range": [50, 67], "color": "#ff4444"},
+                {"range": [67, 83], "color": "#ffaa00"},
+                {"range": [83, 100], "color": "#44bb44"},
             ],
             "threshold": {
                 "line": {"color": "black", "width": 4},
