@@ -231,7 +231,7 @@ else:
     if st.button("Studie starten →", use_container_width=True, type="primary"):
         st.markdown(
             """
-            <meta http-equiv="refresh" content="0; url=https://YOUR-GAUGE-LINK.streamlit.app">
+            <meta http-equiv="refresh" content="0; url=https://xai-dashboard-7xqv5jewinsysqutxykzrs.streamlit.app">
             """,
             unsafe_allow_html=True
         )
