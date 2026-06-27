@@ -1,5 +1,5 @@
 """
-app_onboarding.py — Step-by-step onboarding module for the user study.
+app_onboarding_gauge.py — Step-by-step onboarding module for the user study.
 
 Introduces participants to the dashboard components one at a time
 before the actual measurement begins. The confidence display is
@@ -14,7 +14,6 @@ or model training, ensuring the module works in cloud environments.
 import streamlit as st
 import numpy as np
 from components.shap_plot import show_shap_chart
-from components.feature_mapping import FEATURE_LABELS
 
 # ── Page Configuration ────────────────────────────────────────────
 st.set_page_config(
@@ -169,7 +168,7 @@ if step >= 2:
             "**Modellvorhersage**\n\n"
             "Das Modell bewertet den Kreditantragsteller als **Low Risk** (geringes Risiko) "
             "oder **High Risk** (hohes Risiko). Diese Einschätzung basiert auf den "
-            "Merkmalen des Antragstellers, die links dargestellt sind."
+            "Merkmalen des Antragstellers, die unten dargestellt sind."
         )
 
 # ── Step 3+: SHAP Explanation ─────────────────────────────────────
@@ -193,12 +192,17 @@ if step >= 3:
             "**Erklärung der Vorhersage (SHAP)**\n\n"
             "Dieses Diagramm zeigt, welche Merkmale den größten Einfluss auf die "
             "Vorhersage hatten.\n\n"
-            "- **Grüne Balken** unterstützen die Vorhersage — sie sprechen dafür, "
-            "dass der Antragsteller das vorhergesagte Risikoprofil hat.\n"
-            "- **Rote Balken** sprechen dagegen — sie deuten in die entgegengesetzte "
-            "Richtung.\n"
+            "- **Rote Balken** erhöhen die Vorhersage — sie sprechen für ein "
+            "höheres Risiko.\n"
+            "- **Blaue Balken** senken die Vorhersage — sie sprechen für ein "
+            "geringeres Risiko.\n"
             "- **Längere Balken** bedeuten einen stärkeren Einfluss auf die Vorhersage.\n\n"
-            "Die Prozentwerte zeigen, wie viel jedes Merkmal relativ zur Gesamtvorhersage beigetragen hat."
+            "Wenn Sie mit der Maus über einen Balken fahren, sehen Sie den genauen "
+            "SHAP-Wert und den relativen prozentualen Beitrag."
+            "Für die Durchführung der Studie wird diese Ansicht zuerst zu geklappt sein,"
+            "ihnen ist überlassen ob sie diese nuzten oder nicht"
+
+
         )
 
 # ── Step 4: Confidence Placeholder Info ───────────────────────────
@@ -207,8 +211,9 @@ if step == 4:
         "**Modellkonfidenz (Platzhalter)**\n\n"
         "An der markierten Stelle wird Ihnen gleich angezeigt, wie sicher sich das "
         "Modell bei seiner Vorhersage ist. Diese Darstellung ist der zentrale "
-        "Gegenstand der Studie — Sie werden sie anschließend bewerten.\n\n"
-        "Die Darstellungsform wird Ihnen in der Studie gezeigt."
+        "Gegenstand der Studie — Sie werden sie anschließend bewerten.Es werden zwei unterschiedliche Visualiserungsformen gezeigt\n\n"
+        "Die Darstellungsform wird Ihnen in der Studie gezeigt." 
+        "Dabei lässt sich eine Modelkonfidenz in einem Rahmen zwischen 50% und 100%, zwischen unsicher und sicher bewerten "
     )
 
 # ── Step 5: Transition ────────────────────────────────────────────
