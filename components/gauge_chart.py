@@ -24,7 +24,7 @@ def show_gauge(confidence: float):
             "bar": {"color": "#1f77b4"},
             "steps": [
                 {"range": [0, 50], "color": "#808080 "},
-                {"range": [0, 67], "color": "#ff4444"},
+                {"range": [50, 67], "color": "#ff4444"},
                 {"range": [67, 83], "color": "#ffaa00"},
                 {"range": [83, 100], "color": "#44bb44"},
             ],
