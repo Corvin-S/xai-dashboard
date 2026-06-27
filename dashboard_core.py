@@ -142,15 +142,19 @@ def run_dashboard(condition: str):
 
     # ── Applicant Box ─────────────────────────────────────────────
     with st.container(border=True):
+        def go_previous():
+            st.session_state.case_idx = max(0, st.session_state.case_idx - 1)
+
+        def go_next():
+            st.session_state.case_idx = min(len(case_list) - 1, st.session_state.case_idx + 1)
+
         nav1, nav2, nav3 = st.columns([4, 1, 1])
         with nav1:
             st.markdown(f"### Applicant {st.session_state.case_idx + 1} of {len(case_list)}")
         with nav2:
-            if st.button("← Previous", use_container_width=True):
-                st.session_state.case_idx = max(0, st.session_state.case_idx - 1)
+            st.button("← Previous", use_container_width=True, on_click=go_previous)
         with nav3:
-            if st.button("Next →", use_container_width=True):
-                st.session_state.case_idx = min(len(case_list) - 1, st.session_state.case_idx + 1)
+            st.button("Next →", use_container_width=True, on_click=go_next)
 
         st.markdown("---")
 
