@@ -151,7 +151,7 @@ if step == 2:
         "**Modellvorhersage**\n\n"
         "Das Modell bewertet den Kreditantragsteller als **Low Risk** (geringes Risiko) "
         "oder **High Risk** (hohes Risiko). Diese Einschätzung basiert auf den "
-        "Merkmalen des Antragstellers, die links dargestellt sind."
+        "Merkmalen des Antragstellers, die oben dargestellt sind."
     )
 elif step == 4:
     st.info(
