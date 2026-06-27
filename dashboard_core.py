@@ -45,13 +45,19 @@ def run_dashboard(condition: str):
     )
 
     st.markdown("""
-        <style>
-            div[data-testid="stVerticalBlockBorderWrapper"] {
-                height: 100%;
-                min-height: 400px;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+            <style>
+                div[data-testid="stVerticalBlockBorderWrapper"] {
+                    height: 100%;
+                    min-height: 400px;
+                }
+                .main .block-container {
+                    max-width: 100%;
+                    padding-left: 2rem;
+                    padding-right: 2rem;
+                    padding-top: 1rem;
+                }
+            </style>
+        """, unsafe_allow_html=True)
 
     @st.cache_resource
     def load_model():
