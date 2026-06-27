@@ -20,10 +20,11 @@ def show_gauge(confidence: float):
         title={"text": "Model Confidence", "font": {"size": 20}},
         number={"suffix": "%", "font": {"size": 36}},
         gauge={
-            "axis": {"range": [50, 100], "tickwidth": 1},
+            "axis": {"range": [0, 100], "tickwidth": 1, "dtick": 10, "tick0": 0},
             "bar": {"color": "#1f77b4"},
             "steps": [
-                {"range": [50, 67], "color": "#ff4444"},
+                {"range": [0, 50], "color": "#808080 "},
+                {"range": [0, 67], "color": "#ff4444"},
                 {"range": [67, 83], "color": "#ffaa00"},
                 {"range": [83, 100], "color": "#44bb44"},
             ],
