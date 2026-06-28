@@ -198,7 +198,7 @@ if step == 3:
     st.info(
         "**Erklärung der Vorhersage (SHAP)**\n\n"
         "Dieses Diagramm zeigt, welche Merkmale den größten Einfluss auf die "
-        "Vorhersage hatten.Hierbei werden die wichtigsten **zehn** Kategorien angezeigt.\n\n"
+        "Vorhersage hatten. Hierbei werden die wichtigsten **zehn** Kategorien zur Vorhersage angezeigt.\n\n"
         "- **Rote Balken** erhöhen die Vorhersage\n"
         "- **Blaue Balken** senken die Vorhersage\n"
         "- **Längere Balken** bedeuten einen stärkeren Einfluss auf die Vorhersage.\n\n"
