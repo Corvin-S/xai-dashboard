@@ -190,7 +190,9 @@ if step >= 4:
     with st.expander("Prediction Explanation (SHAP) — click to expand", expanded=True):
         st.caption(
             "The chart below shows which features had the most impact on this "
-            "prediction and how much each feature contributed in percent."
+            "prediction. The x-axis displays the raw SHAP value — the direct "
+            "contribution of each feature to the model output. Hover over a bar "
+            "to see the relative percentage contribution."
         )
 
         readable_feature_names = [FEATURE_LABELS.get(f, f) for f in X_test.columns]
