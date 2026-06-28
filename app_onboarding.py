@@ -51,7 +51,7 @@ if "step" not in st.session_state:
 step = st.session_state.step
 
 # ── Header ────────────────────────────────────────────────────────
-st.title("Credit Risk Dashboard — Introduction")
+st.title("Credit Risk Dashboard — Einleitung")
 st.caption(
     "This introduction will guide you through the dashboard step by step. "
     "Each element will be explained before you begin the study."
