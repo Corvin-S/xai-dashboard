@@ -15,7 +15,7 @@ from components.feature_mapping import decode_case, FEATURE_LABELS
 
 # ── Page Configuration ────────────────────────────────────────────
 st.set_page_config(
-    page_title="Credit Risk Dashboard — Introduction",
+    page_title="Credit Risk Dashboard — Einleitung",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
