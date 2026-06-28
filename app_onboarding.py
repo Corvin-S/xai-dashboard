@@ -198,13 +198,13 @@ if step == 3:
     st.info(
         "**Erklärung der Vorhersage (SHAP)**\n\n"
         "Dieses Diagramm zeigt, welche Merkmale den größten Einfluss auf die "
-        "Vorhersage hatten.\n\n"
+        "Vorhersage hatten.Hierbei werden die wichtigsten **zehn** Kategorien angezeigt.\n\n"
         "- **Rote Balken** erhöhen die Vorhersage\n"
         "- **Blaue Balken** senken die Vorhersage\n"
         "- **Längere Balken** bedeuten einen stärkeren Einfluss auf die Vorhersage.\n\n"
-        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten Antragsteller beeinflusst hat — im Vergleich zu einem durchschnittlichen Antragsteller. Ein hoher Wert bedeutet einen großen Einfluss.\n\n"
+        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten Antragsteller beeinflusst hat — im Vergleich zur durchschnittlichen Vorhersage über alle Antragsteller. Ein hoher Wert bedeutet einen höheren Einfluss.\n\n"
         "Wenn Sie mit der Maus über einen Balken fahren, sehen Sie den genauen "
-        "SHAP-Wert und den relativen prozentualen Beitrag."
+        "SHAP-Wert und den relativen prozentualen Beitrag zur Gesamtvorhersage."
     )
 
 # ── Step 5: Transition ────────────────────────────────────────────
