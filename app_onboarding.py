@@ -202,7 +202,7 @@ if step == 3:
         "- **Rote Balken** erhöhen die Vorhersage\n"
         "- **Blaue Balken** senken die Vorhersage\n"
         "- **Längere Balken** bedeuten einen stärkeren Einfluss auf die Vorhersage.\n\n"
-        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten Antragsteller beeinflusst hat — im Vergleich zu einem durchschnittlichen Antragsteller. Ein hoher Wert bedeutet einen großen Einfluss.\n"
+        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten Antragsteller beeinflusst hat — im Vergleich zu einem durchschnittlichen Antragsteller. Ein hoher Wert bedeutet einen großen Einfluss.\n\n"
         "Wenn Sie mit der Maus über einen Balken fahren, sehen Sie den genauen "
         "SHAP-Wert und den relativen prozentualen Beitrag."
     )
