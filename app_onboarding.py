@@ -10,7 +10,7 @@ from components.feature_mapping import decode_case, FEATURE_LABELS
 
 # ── Page Configuration ────────────────────────────────────────────
 st.set_page_config(
-    page_title="Credit Risk Dashboard — Introduction",
+    page_title="Credit Risk Dashboard — Einführung",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -48,8 +48,8 @@ step = st.session_state.step
 # ── Header ────────────────────────────────────────────────────────
 st.title("Credit Risk Dashboard — Introduction")
 st.caption(
-    "This introduction will guide you through the dashboard step by step. "
-    "Each element will be explained before you begin the study."
+    "Diese Anleitung soll ihnen helfen das folgende Dashboard Schritt für Schritt zuverstehen. "
+    "Hierbei wird jedes einzelene Element des Dashboard und seine Funktion eimal erklärt."
 )
 st.progress(step / 6)
 st.markdown("---")
