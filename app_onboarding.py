@@ -46,7 +46,7 @@ if "step" not in st.session_state:
 step = st.session_state.step
 
 # ── Header ────────────────────────────────────────────────────────
-st.title("Credit Risk Dashboard — Introduction")
+st.title("Credit Risk Dashboard — Einführung")
 st.caption(
     "Diese Anleitung soll ihnen helfen das folgende Dashboard Schritt für Schritt zuverstehen. "
     "Hierbei wird jedes einzelene Element des Dashboard und seine Funktion eimal erklärt."
@@ -189,8 +189,8 @@ if step >= 4:
 
     with st.expander("Prediction Explanation (SHAP) — click to expand", expanded=True):
         st.caption(
-            "The chart below shows which features had the most impact on this "
-            "prediction. The x-axis displays the raw SHAP value — the direct "
+            "The chart below shows which features had the most impact on the "
+            "prediction of ""High Risk"" or ""Low Risk"". The x-axis displays the raw SHAP value — the direct "
             "contribution of each feature to the model output. Hover over a bar "
             "to see the relative percentage contribution."
         )
@@ -215,7 +215,7 @@ if step == 4:
         "- **Blaue Balken** senken die Vorhersage\n"
         "- **Längere Balken** bedeuten einen stärkeren Einfluss auf die Vorhersage.\n\n"
         "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten "
-        "Antragsteller beeinflusst hat — im Vergleich zur durchschnittlichen Vorhersage über alle "
+        "Antragsteller beeinflusst hat, im Vergleich zur durchschnittlichen Vorhersage über alle "
         "Antragsteller. Ein hoher Wert bedeutet einen höheren Einfluss.\n\n"
         "Wenn Sie mit der Maus über einen Balken fahren, sehen Sie den genauen "
         "SHAP-Wert und den relativen prozentualen Beitrag zur Gesamtvorhersage.\n\n"
