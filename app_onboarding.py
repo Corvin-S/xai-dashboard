@@ -57,7 +57,16 @@ st.markdown("---")
 # ── Step 1+: Applicant Features ───────────────────────────────────
 if step >= 1:
     with st.container(border=True):
-        st.markdown("### Example Applicant")
+        # Navigation buttons inside applicant box (matches dashboard layout)
+        nav1, nav2, nav3 = st.columns([4, 1, 1])
+        with nav1:
+            st.markdown("### Example Applicant")
+        if step >= 2:
+            with nav2:
+                st.button("← Previous", disabled=True, use_container_width=True)
+            with nav3:
+                st.button("Next →", disabled=True, use_container_width=True)
+
         st.markdown("---")
 
         decoded = decode_case(case)
@@ -99,30 +108,15 @@ if step == 1:
         "des Modells."
     )
 
-st.markdown("---")
-
-# ── Step 2+: Navigation Buttons ───────────────────────────────────
-if step >= 2:
-    with st.container(border=True):
-        nav_cols = st.columns([4, 1, 1])
-        with nav_cols[0]:
-            st.markdown("**Applicant 1 of 6**")
-        with nav_cols[1]:
-            st.button("← Previous", disabled=True, use_container_width=True)
-        with nav_cols[2]:
-            st.button("Next →", disabled=True, use_container_width=True)
-
 if step == 2:
     st.info(
         "**Navigation zwischen den Kreditfällen**\n\n"
         "In der Studie sehen Sie sechs Kreditfälle pro Runde. "
-        "Mit den Schaltflächen **← Previous** und **Next →** können Sie "
+        "Mit den Schaltflächen **← Previous** und **Next →** oben rechts können Sie "
         "zwischen den einzelnen Fällen hin- und herwechseln.\n\n"
         "Bitte klicken Sie sich durch **alle sechs Fälle**, bevor "
         "Sie zum Fragebogen zurückkehren."
     )
-
-st.markdown("---")
 
 # ── Step 3+: Prediction + Confidence area ─────────────────────────
 if step >= 3:
