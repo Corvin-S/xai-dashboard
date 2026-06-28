@@ -199,11 +199,10 @@ if step == 3:
         "**Erklärung der Vorhersage (SHAP)**\n\n"
         "Dieses Diagramm zeigt, welche Merkmale den größten Einfluss auf die "
         "Vorhersage hatten.\n\n"
-        "- **Rote Balken** erhöhen die Vorhersage — sie sprechen für ein "
-        "höheres Risiko.\n"
-        "- **Blaue Balken** senken die Vorhersage — sie sprechen für ein "
-        "geringeres Risiko.\n"
+        "- **Rote Balken** erhöhen die Vorhersage\n"
+        "- **Blaue Balken** senken die Vorhersage\n"
         "- **Längere Balken** bedeuten einen stärkeren Einfluss auf die Vorhersage.\n\n"
+        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten Antragsteller beeinflusst hat — im Vergleich zu einem durchschnittlichen Antragsteller. Ein hoher Wert bedeutet einen großen Einfluss."
         "Wenn Sie mit der Maus über einen Balken fahren, sehen Sie den genauen "
         "SHAP-Wert und den relativen prozentualen Beitrag."
     )
@@ -239,7 +238,7 @@ else:
     with group_col2:
         st.link_button(
             "Gruppe 2 — Studie starten →",
-            "https://LINK-FOLGT-NOCH.com",
+            "https://docs.google.com/forms/d/e/1FAIpQLSd5xQp_RLAludkGZLXEknoxMJ2TTYYpNCI83x72Z8vi52O7og/viewform?usp=publish-editor ",
             use_container_width=True,
             type="primary"
         )
