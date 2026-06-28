@@ -1,5 +1,10 @@
 """
 app_onboarding.py — Step-by-step onboarding module for the user study.
+
+Introduces participants to the dashboard components one at a time
+before the actual measurement begins. The confidence display is
+deliberately shown as a placeholder to avoid priming participants
+with either the gauge or text format before the study.
 """
 
 import streamlit as st
@@ -10,7 +15,7 @@ from components.feature_mapping import decode_case, FEATURE_LABELS
 
 # ── Page Configuration ────────────────────────────────────────────
 st.set_page_config(
-    page_title="Credit Risk Dashboard — Einführung",
+    page_title="Credit Risk Dashboard — Introduction",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -46,22 +51,45 @@ if "step" not in st.session_state:
 step = st.session_state.step
 
 # ── Header ────────────────────────────────────────────────────────
-st.title("Credit Risk Dashboard — Einführung")
+st.title("Credit Risk Dashboard — Introduction")
 st.caption(
-    "Diese Anleitung soll ihnen helfen das folgende Dashboard Schritt für Schritt zuverstehen. "
-    "Hierbei wird jedes einzelene Element des Dashboard und seine Funktion eimal erklärt."
+    "This introduction will guide you through the dashboard step by step. "
+    "Each element will be explained before you begin the study."
 )
-st.progress(step / 6)
+st.progress(step / 7)
 st.markdown("---")
 
-# ── Step 1+: Applicant Features ───────────────────────────────────
-if step >= 1:
+# ── Step 1: Use Case Introduction ─────────────────────────────────
+if step == 1:
+    st.markdown("### Ihr Szenario")
+
+    st.info(
+        "**Stellen Sie sich vor, Sie arbeiten als Kreditsachbearbeiter bei einer Bank.**\n\n"
+        "Ihre Aufgabe: Sie prüfen Kreditanträge und entscheiden, ob ein Antrag "
+        "**bewilligt** oder **abgelehnt** wird.\n\n"
+        "Um Sie bei dieser Entscheidung zu unterstützen, steht Ihnen ein "
+        "**KI-gestütztes Dashboard** zur Verfügung. Für jeden Antragsteller zeigt "
+        "das Dashboard drei Informationen:\n\n"
+        "1. **Die Merkmale des Antragstellers** — z. B. Einkommen, Alter, "
+        "bestehende Kredite\n"
+        "2. **Die Vorhersage des KI-Modells** — ob der Antragsteller ein "
+        "niedriges oder hohes Kreditrisiko darstellt\n"
+        "3. **Wie sicher sich das Modell bei dieser Vorhersage ist** — "
+        "die sogenannte Modellkonfidenz\n\n"
+        "Das Dashboard ist ein Hilfsmittel — **die Entscheidung liegt bei Ihnen.** "
+        "Das Modell kann sich irren. Die Konfidenzanzeige zeigt Ihnen, "
+        "wie sehr Sie sich auf die Einschätzung des Modells verlassen können.\n\n"
+        "In der folgenden Einführung lernen Sie die einzelnen Elemente des "
+        "Dashboards Schritt für Schritt kennen."
+    )
+
+# ── Step 2+: Applicant Features ───────────────────────────────────
+if step >= 2:
     with st.container(border=True):
-        # Navigation buttons inside applicant box (matches dashboard layout)
         nav1, nav2, nav3 = st.columns([4, 1, 1])
         with nav1:
             st.markdown("### Example Applicant")
-        if step >= 2:
+        if step >= 3:
             with nav2:
                 st.button("← Previous", disabled=True, use_container_width=True)
             with nav3:
@@ -99,7 +127,7 @@ if step >= 1:
                             unsafe_allow_html=True
                         )
 
-if step == 1:
+if step == 2:
     st.info(
         "**Merkmale des Kreditantragstellers**\n\n"
         "Hier sehen Sie die Merkmale eines Kreditantragstellers, aufgeteilt in "
@@ -108,7 +136,7 @@ if step == 1:
         "des Modells."
     )
 
-if step == 2:
+if step == 3:
     st.info(
         "**Navigation zwischen den Kreditfällen**\n\n"
         "In der Studie sehen Sie sechs Kreditfälle pro Runde. "
@@ -118,8 +146,10 @@ if step == 2:
         "Sie zum Fragebogen zurückkehren."
     )
 
-# ── Step 3+: Prediction + Confidence area ─────────────────────────
-if step >= 3:
+st.markdown("---")
+
+# ── Step 4+: Prediction + Confidence area ─────────────────────────
+if step >= 4:
     pred_col, conf_col = st.columns([1, 2])
 
     with pred_col:
@@ -132,7 +162,7 @@ if step >= 3:
             )
 
     with conf_col:
-        if step >= 5:
+        if step >= 6:
             with st.container(border=True):
                 st.subheader("Model Confidence")
                 st.markdown(
@@ -156,14 +186,14 @@ if step >= 3:
         else:
             st.empty()
 
-if step == 3:
+if step == 4:
     st.info(
         "**Modellvorhersage**\n\n"
         "Das Modell bewertet den Kreditantragsteller als **Low Risk** (geringes Risiko) "
         "oder **High Risk** (hohes Risiko). Diese Einschätzung basiert auf den "
         "Merkmalen des Antragstellers, die oben dargestellt sind."
     )
-elif step == 5:
+elif step == 6:
     st.info(
         "**Modellkonfidenz (Platzhalter)**\n\n"
         "An der markierten Stelle wird Ihnen gleich angezeigt, wie sicher sich das "
@@ -183,16 +213,14 @@ elif step == 5:
         "- **Grün** (83–100 %): hohe Konfidenz"
     )
 
-# ── Step 4+: SHAP Explanation ─────────────────────────────────────
-if step >= 4:
+# ── Step 5+: SHAP Explanation ─────────────────────────────────────
+if step >= 5:
     st.markdown("---")
 
     with st.expander("Prediction Explanation (SHAP) — click to expand", expanded=True):
         st.caption(
-            "The chart below shows which features had the most impact on the "
-            "prediction of ""High Risk"" or ""Low Risk"". The x-axis displays the raw SHAP value — the direct "
-            "contribution of each feature to the model output. Hover over a bar "
-            "to see the relative percentage contribution."
+            "The chart below shows which features had the most impact on this "
+            "prediction and how much each feature contributed in percent."
         )
 
         readable_feature_names = [FEATURE_LABELS.get(f, f) for f in X_test.columns]
@@ -206,25 +234,27 @@ if step >= 4:
         )
         st.plotly_chart(fig, use_container_width=True)
 
-if step == 4:
+if step == 5:
     st.info(
         "**Erklärung der Vorhersage (SHAP)**\n\n"
         "Dieses Diagramm zeigt, welche Merkmale den größten Einfluss auf die "
-        "Vorhersage hatten. Hierbei werden die wichtigsten **zehn** Merkmale für die Vorhersage angezeigt.\n\n"
+        "Vorhersage hatten. Hierbei werden die wichtigsten **zehn** Merkmale für "
+        "die Vorhersage angezeigt.\n\n"
         "- **Rote Balken** erhöhen die Vorhersage\n"
         "- **Blaue Balken** senken die Vorhersage\n"
         "- **Längere Balken** bedeuten einen stärkeren Einfluss auf die Vorhersage.\n\n"
-        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten "
-        "Antragsteller beeinflusst hat, im Vergleich zur durchschnittlichen Vorhersage über alle "
-        "Antragsteller. Ein hoher Wert bedeutet einen höheren Einfluss.\n\n"
+        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für "
+        "diesen konkreten Antragsteller beeinflusst hat — im Vergleich zur "
+        "durchschnittlichen Vorhersage über alle Antragsteller. Ein hoher Wert "
+        "bedeutet einen höheren Einfluss.\n\n"
         "Wenn Sie mit der Maus über einen Balken fahren, sehen Sie den genauen "
         "SHAP-Wert und den relativen prozentualen Beitrag zur Gesamtvorhersage.\n\n"
         "Für die Durchführung der Studie wird diese Ansicht zunächst zugeklappt sein. "
         "Ihnen ist überlassen, ob Sie diese nutzen oder nicht."
     )
 
-# ── Step 6: Transition ────────────────────────────────────────────
-if step == 6:
+# ── Step 7: Transition ────────────────────────────────────────────
+if step == 7:
     st.success(
         "**Sie haben alle Elemente des Dashboards kennengelernt!**\n\n"
         "In der Studie sehen Sie mehrere Kreditfälle. Für jeden Fall zeigt das "
@@ -235,7 +265,7 @@ if step == 6:
 
 # ── Navigation Button ─────────────────────────────────────────────
 st.markdown("---")
-if step < 6:
+if step < 7:
     if st.button("Weiter →", use_container_width=True, type="primary"):
         st.session_state.step += 1
         st.rerun()
