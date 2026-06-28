@@ -1,10 +1,5 @@
 """
 app_onboarding.py — Step-by-step onboarding module for the user study.
-
-Introduces participants to the dashboard components one at a time
-before the actual measurement begins. The confidence display is
-deliberately shown as a placeholder to avoid priming participants
-with either the gauge or text format before the study.
 """
 
 import streamlit as st
@@ -39,7 +34,6 @@ def load_example():
 
 X_test, shap_values = load_example()
 
-# Use first case as example
 idx = 0
 case = X_test.iloc[idx]
 pred = 0
@@ -57,7 +51,7 @@ st.caption(
     "This introduction will guide you through the dashboard step by step. "
     "Each element will be explained before you begin the study."
 )
-st.progress(step / 5)
+st.progress(step / 6)
 st.markdown("---")
 
 # ── Step 1+: Applicant Features ───────────────────────────────────
@@ -107,8 +101,31 @@ if step == 1:
 
 st.markdown("---")
 
-# ── Step 2+: Prediction + Confidence area ─────────────────────────
+# ── Step 2+: Navigation Buttons ───────────────────────────────────
 if step >= 2:
+    with st.container(border=True):
+        nav_cols = st.columns([4, 1, 1])
+        with nav_cols[0]:
+            st.markdown("**Applicant 1 of 6**")
+        with nav_cols[1]:
+            st.button("← Previous", disabled=True, use_container_width=True)
+        with nav_cols[2]:
+            st.button("Next →", disabled=True, use_container_width=True)
+
+if step == 2:
+    st.info(
+        "**Navigation zwischen den Kreditfällen**\n\n"
+        "In der Studie sehen Sie sechs Kreditfälle pro Runde. "
+        "Mit den Schaltflächen **← Previous** und **Next →** können Sie "
+        "zwischen den einzelnen Fällen hin- und herwechseln.\n\n"
+        "Bitte klicken Sie sich durch **alle sechs Fälle**, bevor "
+        "Sie zum Fragebogen zurückkehren."
+    )
+
+st.markdown("---")
+
+# ── Step 3+: Prediction + Confidence area ─────────────────────────
+if step >= 3:
     pred_col, conf_col = st.columns([1, 2])
 
     with pred_col:
@@ -121,7 +138,7 @@ if step >= 2:
             )
 
     with conf_col:
-        if step >= 4:
+        if step >= 5:
             with st.container(border=True):
                 st.subheader("Model Confidence")
                 st.markdown(
@@ -145,15 +162,14 @@ if step >= 2:
         else:
             st.empty()
 
-# Info-Box fuer Step 2 oder Step 4 — zwischen Prediction und SHAP
-if step == 2:
+if step == 3:
     st.info(
         "**Modellvorhersage**\n\n"
         "Das Modell bewertet den Kreditantragsteller als **Low Risk** (geringes Risiko) "
         "oder **High Risk** (hohes Risiko). Diese Einschätzung basiert auf den "
         "Merkmalen des Antragstellers, die oben dargestellt sind."
     )
-elif step == 4:
+elif step == 5:
     st.info(
         "**Modellkonfidenz (Platzhalter)**\n\n"
         "An der markierten Stelle wird Ihnen gleich angezeigt, wie sicher sich das "
@@ -173,8 +189,8 @@ elif step == 4:
         "- **Grün** (83–100 %): hohe Konfidenz"
     )
 
-# ── Step 3+: SHAP Explanation ─────────────────────────────────────
-if step >= 3:
+# ── Step 4+: SHAP Explanation ─────────────────────────────────────
+if step >= 4:
     st.markdown("---")
 
     with st.expander("Prediction Explanation (SHAP) — click to expand", expanded=True):
@@ -194,21 +210,25 @@ if step >= 3:
         )
         st.plotly_chart(fig, use_container_width=True)
 
-if step == 3:
+if step == 4:
     st.info(
         "**Erklärung der Vorhersage (SHAP)**\n\n"
         "Dieses Diagramm zeigt, welche Merkmale den größten Einfluss auf die "
-        "Vorhersage hatten. Hierbei werden die wichtigsten **zehn** Merkmale zur Vorhersage angezeigt.\n\n"
+        "Vorhersage hatten. Hierbei werden die wichtigsten **zehn** Merkmale für die Vorhersage angezeigt.\n\n"
         "- **Rote Balken** erhöhen die Vorhersage\n"
         "- **Blaue Balken** senken die Vorhersage\n"
         "- **Längere Balken** bedeuten einen stärkeren Einfluss auf die Vorhersage.\n\n"
-        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten Antragsteller beeinflusst hat — im Vergleich zur durchschnittlichen Vorhersage über alle Antragsteller. Ein hoher Wert bedeutet einen höheren Einfluss.\n\n"
+        "Der SHAP-Wert zeigt, wie stark ein einzelnes Merkmal die Vorhersage für diesen konkreten "
+        "Antragsteller beeinflusst hat — im Vergleich zur durchschnittlichen Vorhersage über alle "
+        "Antragsteller. Ein hoher Wert bedeutet einen höheren Einfluss.\n\n"
         "Wenn Sie mit der Maus über einen Balken fahren, sehen Sie den genauen "
-        "SHAP-Wert und den relativen prozentualen Beitrag zur Gesamtvorhersage."
+        "SHAP-Wert und den relativen prozentualen Beitrag zur Gesamtvorhersage.\n\n"
+        "Für die Durchführung der Studie wird diese Ansicht zunächst zugeklappt sein. "
+        "Ihnen ist überlassen, ob Sie diese nutzen oder nicht."
     )
 
-# ── Step 5: Transition ────────────────────────────────────────────
-if step == 5:
+# ── Step 6: Transition ────────────────────────────────────────────
+if step == 6:
     st.success(
         "**Sie haben alle Elemente des Dashboards kennengelernt!**\n\n"
         "In der Studie sehen Sie mehrere Kreditfälle. Für jeden Fall zeigt das "
@@ -219,7 +239,7 @@ if step == 5:
 
 # ── Navigation Button ─────────────────────────────────────────────
 st.markdown("---")
-if step < 5:
+if step < 6:
     if st.button("Weiter →", use_container_width=True, type="primary"):
         st.session_state.step += 1
         st.rerun()
@@ -238,7 +258,7 @@ else:
     with group_col2:
         st.link_button(
             "Gruppe 2 — Studie starten →",
-            "https://docs.google.com/forms/d/e/1FAIpQLSd5xQp_RLAludkGZLXEknoxMJ2TTYYpNCI83x72Z8vi52O7og/viewform?usp=publish-editor ",
+            "https://docs.google.com/forms/d/e/1FAIpQLSd5xQp_RLAludkGZLXEknoxMJ2TTYYpNCI83x72Z8vi52O7og/viewform?usp=publish-editor",
             use_container_width=True,
             type="primary"
         )
